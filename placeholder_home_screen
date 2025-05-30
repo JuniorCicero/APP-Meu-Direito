@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'app_colors.dart'; // Importa suas cores
+
+class PlaceholderHomeScreen extends StatelessWidget {
+  const PlaceholderHomeScreen({super.key}); // Adicionada chave ao construtor
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+            'Página Inicial'), // Título virá do tema do AppBar em main.dart
+        automaticallyImplyLeading: false, // Remove o botão de voltar automático
+      ),
+      body: const Center(
+        child: Text(
+          'Bem-vindo! Você está logado.',
+          style: TextStyle(
+              fontSize: 20, color: azulEscuro), // Usando cor de app_colors.dart
+        ),
+      ),
+    );
+  }
+}
