@@ -7,19 +7,15 @@ import 'login_screen.dart'; // Para o logout
 class NovosLeadsScreenPlaceholder extends StatelessWidget {
   const NovosLeadsScreenPlaceholder({super.key});
 
-  // TODO: No futuro, esta tela lerá a lista 'leadsGlobaisSimulados'
-  // que será preenchida quando um usuário enviar uma análise.
+  final List<Map<String, String>> leadsFicticios = const [ // Tornando a lista acessível
+    {'id': '1', 'area': 'Direito do Consumidor', 'resumo': 'Problema com garantia de produto eletrônico...'},
+    {'id': '2', 'area': 'Direito Trabalhista', 'resumo': 'Dúvidas sobre cálculo de horas extras e rescisão...'},
+    {'id': '3', 'area': 'Direito Imobiliário', 'resumo': 'Questão sobre contrato de aluguel e reparos...'},
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // Temporariamente, uma lista fictícia aqui para demonstração do layout
-    final List<Map<String, String>> leadsFicticios = [
-      {'id': '1', 'area': 'Direito do Consumidor', 'resumo': 'Problema com garantia de produto eletrônico...'},
-      {'id': '2', 'area': 'Direito Trabalhista', 'resumo': 'Dúvidas sobre cálculo de horas extras e rescisão...'},
-      {'id': '3', 'area': 'Direito Imobiliário', 'resumo': 'Questão sobre contrato de aluguel e reparos...'},
-    ];
-
-    if (leadsFicticios.isEmpty) { // No futuro, verificará a lista global
+    if (leadsFicticios.isEmpty) {
         return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,9 +34,9 @@ class NovosLeadsScreenPlaceholder extends StatelessWidget {
 
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: leadsFicticios.length, // No futuro, usará leadsGlobaisSimulados.length
+      itemCount: leadsFicticios.length,
       itemBuilder: (context, index) {
-        final lead = leadsFicticios[index]; // No futuro, usará leadsGlobaisSimulados[index]
+        final lead = leadsFicticios[index];
         return Card(
           elevation: 1.5,
           margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -68,7 +64,6 @@ class NovosLeadsScreenPlaceholder extends StatelessWidget {
                     TextButton(
                       child: const Text('Recusar', style: TextStyle(color: Colors.redAccent)),
                       onPressed: () {
-                        // TODO: Lógica para recusar o lead
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Lead "${lead['resumo']!.substring(0,10)}..." recusado (Simulação)')),
                         );
@@ -79,7 +74,6 @@ class NovosLeadsScreenPlaceholder extends StatelessWidget {
                       style: ElevatedButton.styleFrom(backgroundColor: verdeSucesso),
                       child: const Text('Aceitar Caso', style: TextStyle(color: branco)),
                       onPressed: () {
-                        // TODO: Lógica para aceitar o caso e contatar usuário
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Lead "${lead['resumo']!.substring(0,10)}..." aceito! (Simulação)')),
                         );
@@ -110,8 +104,20 @@ class PerfilAdvScreenPlaceholder extends StatelessWidget {
   const PerfilAdvScreenPlaceholder({super.key});
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Tela de Perfil (Advogado - Placeholder)', style: TextStyle(fontSize: 20, color: cinzaTexto)),
+    // TODO: No futuro, esta tela terá opções de perfil para o advogado
+    // como editar especialidades, OAB, disponibilidade, etc.
+    // Por enquanto, um placeholder simples.
+    return ListView( // Adicionado ListView para consistência e futuras opções
+      padding: const EdgeInsets.all(16.0),
+      children: const [
+         Center(
+          child: Text('Perfil do Advogado (Placeholder)', style: TextStyle(fontSize: 20, color: cinzaTexto)),
+        ),
+        SizedBox(height: 20),
+        // Exemplo de como adicionaríamos opções depois:
+        // Card(child: ListTile(leading: Icon(Icons.edit_document), title: Text("Editar Dados Profissionais"))),
+        // Card(child: ListTile(leading: Icon(Icons.settings_outlined), title: Text("Configurações da Conta"))),
+      ],
     );
   }
 }
@@ -185,13 +191,13 @@ class _MainScreenAdvogadoState extends State<MainScreenAdvogado> {
             label: 'Novos Leads',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.work_history_outlined),
-            activeIcon: Icon(Icons.work_history),
+            icon: Icon(Icons.work_history_outlined), // Sugestão: Icons.folder_copy_outlined
+            activeIcon: Icon(Icons.work_history),   // Sugestão: Icons.folder_copy
             label: 'Casos Ativos',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_badge_outlined),
-            activeIcon: Icon(Icons.person_badge),
+            icon: Icon(Icons.person_outline),    // <<< ÍCONE CORRIGIDO
+            activeIcon: Icon(Icons.person),         // <<< ÍCONE CORRIGIDO
             label: 'Perfil Adv.',
           ),
         ],
